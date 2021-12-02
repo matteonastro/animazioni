@@ -25,5 +25,21 @@ var redSquare = {
     y: 120,
     color: "red"
   }
+  function up() {
+    redSquare.y -= 30;
+  }
+  function down() {
+    redSquare.y += 30;
+  }
+  function left() {
+    redSquare.x -= 30;
+  }
+  function right() {
+    redSquare.x += 30;
+  }
+  
+  
+  
+  
   
   
