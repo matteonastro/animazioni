@@ -21,7 +21,6 @@ var myGameArea = {
   clear: function () {
     this.context.fillStyle = 'white';
     this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    //this.contex.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
   }
 }
