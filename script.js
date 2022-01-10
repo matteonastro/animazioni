@@ -24,10 +24,26 @@ var myGameArea = {
 
   }
 }
-
+let levelIndex = 1;
 function updateGameArea() {
   myGameArea.clear();
   myGameArea.draw(redsquare);
+
+  switch (levelIndex){
+    case 1:
+      livello1();
+      break;
+    case 2:
+      livello2();
+      break;
+  }
+
+
+  check();
+  redsquare.x += hsp;
+  redsquare.y += vsp;
+}
+function livello1(){
   myGameArea.draw(goldSquare);
 
   myGameArea.draw(ost1);
@@ -40,12 +56,39 @@ function updateGameArea() {
 
   collisionWin(goldSquare);
 
-  movimento1();
-  movimento2();
-  movimento3();
+  movimento3(ost1, 7);
+  movimento3(ost2, 5);
+  movimento3(ost3, 6);
 
-  redsquare.x += hsp;
-  redsquare.y += vsp;
+}
+function livello2(){
+
+  myGameArea.draw(l2ost1);
+  newBoxCollision(l2ost1);
+  movimento3(l2ost1, 7);
+
+  myGameArea.draw(l2ost2);
+  newBoxCollision(l2ost2);
+  movimento3(l2ost2, 5);
+
+  myGameArea.draw(l2ost3);
+  newBoxCollision(l2ost3);
+  movimento3(l2ost3, 6);
+}
+
+function check(){
+  if (redsquare.x + hsp<0){
+    hsp =0;
+  }
+  if (redsquare.y + vsp<0){
+    vsp =0;
+  }
+  if (redsquare.x + redsquare.width + hsp> 500){
+    hsp =0;
+  }
+  if (redsquare.y + redsquare.height + vsp> 300){
+    vsp =0;
+  }
 }
 
 var redsquare = {
@@ -69,74 +112,85 @@ var ost1 = {
   height: 25,
   x: 320,
   y: 135,
-  color: "black"
+  color: "black",
+  border: false
 }
 var ost2 = {
   width: 25,
   height: 25,
   x: 120,
   y: 135,
-  color: "black"
+  color: "black",
+  border: false
 }
 var ost3 = {
   width: 25,
   height: 25,
   x: 220,
   y: 135,
-  color: "black"
+  color: "black",
+  border: false
 }
 
-function up() {
-  if (redsquare.y>=10) {
-    redsquare.y -= 10;
-  }
+var l2ost1 = {
+  width: 25,
+  height: 25,
+  x: 260,
+  y: 105,
+  color: "black",
+  border: false
 }
-function down() {
-  if (redsquare.y<=270) {
-    redsquare.y += 10;
-  }
+var l2ost2 = {
+  width: 25,
+  height: 25,
+  x: 220,
+  y: 105,
+  color: "black",
+  border: false
 }
-function left() {
-  if (redsquare.x>=10) {
-    redsquare.x -= 10;
-  }
-}
-function right() {
-  if (redsquare.x<=470) {
-    redsquare.x+= 10;
-  }
+
+var l2ost3 = {
+  width: 25,
+  height: 25,
+  x: 120,
+  y: 105,
+  color: "black",
+  border: false
 }
 
 
 
 function newBoxCollision(box){
-  let playerWidth = redsquare.x + redsquare.width + 5;
+  let playerWidth = redsquare.x + redsquare.width;
   let playerHeight = redsquare.y + redsquare.height;
-  let boxWidth = box.x + box.width + 5;
+  let boxWidth = box.x + box.width;
   let boxHeight = box.y + box.height;
 
   if (playerHeight > box.y & redsquare.y < boxHeight & redsquare.x < boxWidth){
-     if (playerWidth > box.x + 10){
-      location.reload();
-     
+     if (playerWidth > box.x){
+       redsquare.x = 10;
+       redsquare.y = 10;
       }
   }
   if (playerHeight > box.y & redsquare.y < boxHeight & playerWidth > box.x){
-      if (redsquare.x < boxWidth - 10){
-        location.reload();
+      if (redsquare.x < boxWidth){
+        redsquare.x = 10;
+        redsquare.y = 10;
        
       }
   }
-  if (playerWidth > box.x - 10 & redsquare.x < boxWidth & playerHeight > box.y){
+  if (playerWidth > box.x & redsquare.x < boxWidth & playerHeight > box.y){
       if (redsquare.y < boxHeight){
-        location.reload();
         
+       redsquare.x = 10;
+       redsquare.y = 10;
       }
   }
-  if (playerWidth > box.x - 10 & redsquare.x < boxWidth & redsquare.y < boxHeight ){
+  if (playerWidth > box.x  & redsquare.x < boxWidth & redsquare.y < boxHeight ){
       if (playerHeight > box.y){
-        location.reload();
         
+       redsquare.x = 10;
+       redsquare.y = 10;
       }
   }    
 }
@@ -144,61 +198,25 @@ function collisionWin(box) { //collisioni
   let playerWidth = redsquare.x + redsquare.width;
   let playerHeight = redsquare.y + redsquare.height;
   let boxWidth = box.x + box.width + 5;
-
   if (playerWidth > box.x  & redsquare.x < boxWidth  & playerHeight > box.y ){
-    location.reload();
+    levelIndex++;
     alert("Hai vinto!");
   }
 }
 
-let border=false;
 
-function movimento1() {
-  if (ost1.y>=0 && border==false) {
-    ost1.y=ost1.y-6;
+function movimento3(ost, spd) {
+  if (ost.y>=0 && ost.border==false) {
+    ost.y=ost.y-spd;
   }
   else {
-    border=true;
+    ost.border=true;
   }
-  if (ost1.y<=270 && border==true) {
-    ost1.y=ost1.y+6;
-  }
-  else {
-    border=false;
-  }
-}
-
-let border2=false;
-
-function movimento2() {
-  if (ost2.y>=0 && border2==false) {
-    ost2.y=ost2.y-4;
+  if (ost.y<=270 && ost.border==true) {
+    ost.y=ost.y+spd;
   }
   else {
-    border2=true;
-  }
-  if (ost2.y<=270 && border2==true) {
-    ost2.y=ost2.y+4;
-  }
-  else {
-    border2=false;
-  }
-}
-
-let border3=false;
-
-function movimento3() {
-  if (ost3.y>=0 && border3==false) {
-    ost3.y=ost3.y-5;
-  }
-  else {
-    border3=true;
-  }
-  if (ost3.y<=270 && border3==true) {
-    ost3.y=ost3.y+5;
-  }
-  else {
-    border3=false;
+    ost.border=false;
   }
 }
 
