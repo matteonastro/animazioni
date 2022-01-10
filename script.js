@@ -1,6 +1,6 @@
 function startGame() {
   myGameArea.start();
-  myGameArea.draw(redSquare);
+  myGameArea.draw(redsquare);
 }
 
 
@@ -27,25 +27,28 @@ var myGameArea = {
 
 function updateGameArea() {
   myGameArea.clear();
-  myGameArea.draw(redSquare);
+  myGameArea.draw(redsquare);
   myGameArea.draw(goldSquare);
 
   myGameArea.draw(ost1);
   myGameArea.draw(ost2);
   myGameArea.draw(ost3);
 
-  collision(ost1);
-  collision(ost2);
-  collision(ost3);
+  newBoxCollision(ost1);
+  newBoxCollision(ost2);
+  newBoxCollision(ost3);
 
   collisionWin(goldSquare);
 
   movimento1();
   movimento2();
   movimento3();
+
+  redsquare.x += hsp;
+  redsquare.y += vsp;
 }
 
-var redSquare = {
+var redsquare = {
   width: 20,
   height: 20,
   x: 10,
@@ -84,42 +87,65 @@ var ost3 = {
 }
 
 function up() {
-  if (redSquare.y>=10) {
-    redSquare.y -= 10;
+  if (redsquare.y>=10) {
+    redsquare.y -= 10;
   }
 }
 function down() {
-  if (redSquare.y<=270) {
-    redSquare.y += 10;
+  if (redsquare.y<=270) {
+    redsquare.y += 10;
   }
 }
 function left() {
-  if (redSquare.x>=10) {
-    redSquare.x -= 10;
+  if (redsquare.x>=10) {
+    redsquare.x -= 10;
   }
 }
 function right() {
-  if (redSquare.x<=470) {
-    redSquare.x+= 10;
+  if (redsquare.x<=470) {
+    redsquare.x+= 10;
   }
 }
 
-function collision(box) { //collisioni
-  let playerWidth = redSquare.x + redSquare.width;
-  let playerHeight = redSquare.y + redSquare.height;
-  let boxWidth = box.x + box.width + 5;
 
-  if (playerWidth > box.x  & redSquare.x < boxWidth  & playerHeight > box.y ){
-    location.reload();
-    alert("Hai perso!");
+
+function newBoxCollision(box){
+  let playerWidth = redsquare.x + redsquare.width + 5;
+  let playerHeight = redsquare.y + redsquare.height;
+  let boxWidth = box.x + box.width + 5;
+  let boxHeight = box.y + box.height;
+
+  if (playerHeight > box.y & redsquare.y < boxHeight & redsquare.x < boxWidth){
+     if (playerWidth > box.x + 10){
+      location.reload();
+     
+      }
   }
+  if (playerHeight > box.y & redsquare.y < boxHeight & playerWidth > box.x){
+      if (redsquare.x < boxWidth - 10){
+        location.reload();
+       
+      }
+  }
+  if (playerWidth > box.x - 10 & redsquare.x < boxWidth & playerHeight > box.y){
+      if (redsquare.y < boxHeight){
+        location.reload();
+        
+      }
+  }
+  if (playerWidth > box.x - 10 & redsquare.x < boxWidth & redsquare.y < boxHeight ){
+      if (playerHeight > box.y){
+        location.reload();
+        
+      }
+  }    
 }
 function collisionWin(box) { //collisioni
-  let playerWidth = redSquare.x + redSquare.width;
-  let playerHeight = redSquare.y + redSquare.height;
+  let playerWidth = redsquare.x + redsquare.width;
+  let playerHeight = redsquare.y + redsquare.height;
   let boxWidth = box.x + box.width + 5;
 
-  if (playerWidth > box.x  & redSquare.x < boxWidth  & playerHeight > box.y ){
+  if (playerWidth > box.x  & redsquare.x < boxWidth  & playerHeight > box.y ){
     location.reload();
     alert("Hai vinto!");
   }
@@ -175,6 +201,56 @@ function movimento3() {
     border3=false;
   }
 }
+
+let hsp = 0;
+let vsp = 0;
+
+document.addEventListener('keydown', (event) => {
+    
+      switch(event.key) {
+
+          case "a":
+            hsp =-5;
+          break;
+          
+          case "d":
+            hsp =5;
+          break;
+
+          case "w":
+            vsp =-5;
+          break;
+
+          case "s":
+            vsp = 5;
+          break;
+      }
+  }
+);
+
+document.addEventListener('keyup', (event) => {
+    
+  switch(event.key) {
+
+      case "a":
+        hsp =0;
+      break;
+      
+      case "d":
+        hsp =0;
+      break;
+
+      case "w":
+        vsp =0;
+      break;
+
+      case "s":
+        vsp = 0;
+      break;
+  }
+}
+);
+
 
 
 
