@@ -228,19 +228,19 @@ document.addEventListener('keydown', (event) => {
       switch(event.key) {
 
           case "a":
-            hsp =-5;
+            hsp =-8;
           break;
           
           case "d":
-            hsp =5;
+            hsp =8;
           break;
 
           case "w":
-            vsp =-5;
+            vsp =-8;
           break;
 
           case "s":
-            vsp = 5;
+            vsp = 8;
           break;
       }
   }
