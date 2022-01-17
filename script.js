@@ -160,40 +160,16 @@ var l2ost3 = {
 
 
 
-function newBoxCollision(box){
-  let playerWidth = redsquare.x + redsquare.width;
-  let playerHeight = redsquare.y + redsquare.height;
-  let boxWidth = box.x + box.width;
-  let boxHeight = box.y + box.height;
+  function newBoxCollision(box){
 
-  if (playerHeight > box.y & redsquare.y < boxHeight & redsquare.x < boxWidth){
-     if (playerWidth > box.x){
-       redsquare.x = 10;
-       redsquare.y = 10;
-      }
-  }
-  if (playerHeight > box.y & redsquare.y < boxHeight & playerWidth > box.x){
-      if (redsquare.x < boxWidth){
-        redsquare.x = 10;
-        redsquare.y = 10;
-       
-      }
-  }
-  if (playerWidth > box.x & redsquare.x < boxWidth & playerHeight > box.y){
-      if (redsquare.y < boxHeight){
-        
-       redsquare.x = 10;
-       redsquare.y = 10;
-      }
-  }
-  if (playerWidth > box.x  & redsquare.x < boxWidth & redsquare.y < boxHeight ){
-      if (playerHeight > box.y){
-        
-       redsquare.x = 10;
-       redsquare.y = 10;
-      }
-  }    
-}
+    if (redSquare.y < (box.y + box.height) & (redSquare.y + redSquare.height) > box.y & (redSquare.x + redSquare.width + redSquare.hsp) > box.x & redSquare.x + redSquare.hsp < (box.x + box.width)){
+
+            // --> Respawn
+            redSquare.x = 10;
+            redSquare.y = 10;
+        }
+    }
+},
 function collisionWin(box) { //collisioni
   let playerWidth = redsquare.x + redsquare.width;
   let playerHeight = redsquare.y + redsquare.height;
