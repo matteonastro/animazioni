@@ -29,7 +29,7 @@ function updateGameArea() {
   myGameArea.clear();
   myGameArea.draw(redsquare);
 
-  switch (levelIndex){
+  switch (levelIndex) {
     case 1:
       livello1();
       break;
@@ -43,7 +43,7 @@ function updateGameArea() {
   redsquare.x += hsp;
   redsquare.y += vsp;
 }
-function livello1(){
+function livello1() {
   myGameArea.draw(goldSquare);
 
   myGameArea.draw(ost1);
@@ -61,7 +61,7 @@ function livello1(){
   movimento3(ost3, 6);
 
 }
-function livello2(){
+function livello2() {
 
   myGameArea.draw(l2ost1);
   newBoxCollision(l2ost1);
@@ -76,18 +76,18 @@ function livello2(){
   movimento3(l2ost3, 6);
 }
 
-function check(){
-  if (redsquare.x + hsp<0){
-    hsp =0;
+function check() {
+  if (redsquare.x + hsp < 0) {
+    hsp = 0;
   }
-  if (redsquare.y + vsp<0){
-    vsp =0;
+  if (redsquare.y + vsp < 0) {
+    vsp = 0;
   }
-  if (redsquare.x + redsquare.width + hsp> 500){
-    hsp =0;
+  if (redsquare.x + redsquare.width + hsp > 500) {
+    hsp = 0;
   }
-  if (redsquare.y + redsquare.height + vsp> 300){
-    vsp =0;
+  if (redsquare.y + redsquare.height + vsp > 300) {
+    vsp = 0;
   }
 }
 
@@ -159,46 +159,48 @@ var l2ost3 = {
 }
 
 
-function newBoxCollision(box){
+function newBoxCollision(box) {
   let playerWidth = redsquare.x + redsquare.width;
   let playerHeight = redsquare.y + redsquare.height;
   let boxWidth = box.x + box.width;
   let boxHeight = box.y + box.height;
-  function newBoxCollision(box){
 
-  if (playerHeight > box.y & redsquare.y < boxHeight & redsquare.x < boxWidth){
-     if (playerWidth > box.x){
-       redsquare.x = 10;
-       redsquare.y = 10;
-      }
+  if (playerHeight > box.y & redsquare.y < boxHeight & redsquare.x < boxWidth) {
+    if (playerWidth > box.x) {
+      redsquare.x = 10;
+      redsquare.y = 10;
+    }
   }
-  if (playerHeight > box.y & redsquare.y < boxHeight & playerWidth > box.x){
-      if (redsquare.x < boxWidth){
-        redsquare.x = 10;
-        redsquare.y = 10;
+  if (playerHeight > box.y & redsquare.y < boxHeight & playerWidth > box.x) {
+    if (redsquare.x < boxWidth) {
+      redsquare.x = 10;
+      redsquare.y = 10;
 
-      }
+    }
   }
-  if (playerWidth > box.x & redsquare.x < boxWidth & playerHeight > box.y){
-      if (redsquare.y < boxHeight){
+  if (playerWidth > box.x & redsquare.x < boxWidth & playerHeight > box.y) {
+    if (redsquare.y < boxHeight) {
 
-       redsquare.x = 10;
-       redsquare.y = 10;
-      }
+      redsquare.x = 10;
+      redsquare.y = 10;
+    }
   }
-  if (playerWidth > box.x  & redsquare.x < boxWidth & redsquare.y < boxHeight ){
-      if (playerHeight > box.y){
+  if (playerWidth > box.x & redsquare.x < boxWidth & redsquare.y < boxHeight) {
+    if (playerHeight > box.y) {
 
-       redsquare.x = 10;
-       redsquare.y = 10;
-      }
-  }    
+      redsquare.x = 10;
+      redsquare.y = 10;
+    }
+  }
 }
+
+
+
 function collisionWin(box) { //collisioni
   let playerWidth = redsquare.x + redsquare.width;
   let playerHeight = redsquare.y + redsquare.height;
   let boxWidth = box.x + box.width + 5;
-  if (playerWidth > box.x  & redsquare.x < boxWidth  & playerHeight > box.y ){
+  if (playerWidth > box.x & redsquare.x < boxWidth & playerHeight > box.y) {
     levelIndex++;
     alert("Hai vinto!");
   }
@@ -206,17 +208,17 @@ function collisionWin(box) { //collisioni
 
 
 function movimento3(ost, spd) {
-  if (ost.y>=0 && ost.border==false) {
-    ost.y=ost.y-spd;
+  if (ost.y >= 0 && ost.border == false) {
+    ost.y = ost.y - spd;
   }
   else {
-    ost.border=true;
+    ost.border = true;
   }
-  if (ost.y<=270 && ost.border==true) {
-    ost.y=ost.y+spd;
+  if (ost.y <= 270 && ost.border == true) {
+    ost.y = ost.y + spd;
   }
   else {
-    ost.border=false;
+    ost.border = false;
   }
 }
 
@@ -224,54 +226,49 @@ let hsp = 0;
 let vsp = 0;
 
 document.addEventListener('keydown', (event) => {
-    
-      switch(event.key) {
 
-          case "a":
-            hsp =-8;
-          break;
-          
-          case "d":
-            hsp =8;
-          break;
+  switch (event.key) {
 
-          case "w":
-            vsp =-8;
-          break;
-
-          case "s":
-            vsp = 8;
-          break;
-      }
-  }
-);
-
-document.addEventListener('keyup', (event) => {
-    
-  switch(event.key) {
-
-      case "a":
-        hsp =0;
-      break;
-      
-      case "d":
-        hsp =0;
+    case "a":
+      hsp = -8;
       break;
 
-      case "w":
-        vsp =0;
+    case "d":
+      hsp = 8;
       break;
 
-      case "s":
-        vsp = 0;
+    case "w":
+      vsp = -8;
+      break;
+
+    case "s":
+      vsp = 8;
       break;
   }
 }
 );
 
+document.addEventListener('keyup', (event) => {
 
+  switch (event.key) {
 
+    case "a":
+      hsp = 0;
+      break;
 
+    case "d":
+      hsp = 0;
+      break;
 
+    case "w":
+      vsp = 0;
+      break;
+
+    case "s":
+      vsp = 0;
+      break;
+  }
+}
+);
 
 
