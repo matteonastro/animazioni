@@ -49,16 +49,23 @@ function livello1() {
   myGameArea.draw(ost1);
   myGameArea.draw(ost2);
   myGameArea.draw(ost3);
+  myGameArea.draw(ost4);
+  myGameArea.draw(ost5);
 
   newBoxCollision(ost1);
   newBoxCollision(ost2);
   newBoxCollision(ost3);
+  newBoxCollision(ost4);
+  newBoxCollision(ost5);
 
   collisionWin(goldSquare);
 
   movimento3(ost1, 10);
   movimento3(ost2, 9);
   movimento3(ost3, 12);
+  movimento3(ost4, 8);
+  movimento3(ost5, 15)
+
 
 }
 function livello2() {
@@ -99,10 +106,10 @@ var redsquare = {
   color: "red"
 }
 var goldSquare = {
-  width: 15,
-  height: 15,
-  x: 470,
-  y: 135,
+  width: 25,
+  height: 25,
+  x: 760,
+  y: 250,
   color: "gold"
 }
 
@@ -131,6 +138,23 @@ var ost3 = {
   color: "black",
   border: false
 }
+var ost4 = {
+  width: 25,
+  height: 25,
+  x: 400,
+  y: 222,
+  color: "black",
+  border: false
+}
+var ost5 = {
+  width: 25,
+  height: 25,
+  x: 500,
+  y: 222,
+  color: "black",
+  border: false
+}
+
 
 var l2ost1 = {
   width: 25,
@@ -200,7 +224,7 @@ function collisionWin(box) { //collisioni
   let playerWidth = redsquare.x + redsquare.width;
   let playerHeight = redsquare.y + redsquare.height;
   let boxWidth = box.x + box.width + 5;
-  if (playerWidth > box.x & redsquare.x < boxWidth & playerHeight > box.y) {
+  if (playerWidth > box.x & redsquare.x < boxWidth & playerHeight < box.y) {
     levelIndex++;
     alert("Hai vinto!");
   }
