@@ -7,8 +7,8 @@ function startGame() {
 var myGameArea = {
   canvas: document.createElement("canvas"),
   start: function () {
-    this.canvas.width = 500;
-    this.canvas.height = 300;
+    this.canvas.width = 800;
+    this.canvas.height = 600;
     this.context = this.canvas.getContext("2d");
     document.body.insertBefore(this.canvas, document.body.childNodes[0]);
     this.interval = setInterval(updateGameArea, 20);
@@ -56,9 +56,9 @@ function livello1() {
 
   collisionWin(goldSquare);
 
-  movimento3(ost1, 7);
-  movimento3(ost2, 5);
-  movimento3(ost3, 6);
+  movimento3(ost1, 10);
+  movimento3(ost2, 9);
+  movimento3(ost3, 12);
 
 }
 function livello2() {
@@ -83,10 +83,10 @@ function check() {
   if (redsquare.y + vsp < 0) {
     vsp = 0;
   }
-  if (redsquare.x + redsquare.width + hsp > 500) {
+  if (redsquare.x + redsquare.width + hsp > 800) {
     hsp = 0;
   }
-  if (redsquare.y + redsquare.height + vsp > 300) {
+  if (redsquare.y + redsquare.height + vsp > 600) {
     vsp = 0;
   }
 }
@@ -214,7 +214,7 @@ function movimento3(ost, spd) {
   else {
     ost.border = true;
   }
-  if (ost.y <= 270 && ost.border == true) {
+  if (ost.y <= 570 && ost.border == true) {
     ost.y = ost.y + spd;
   }
   else {
