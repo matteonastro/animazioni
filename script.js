@@ -51,12 +51,20 @@ function livello1() {
   myGameArea.draw(ost3);
   myGameArea.draw(ost4);
   myGameArea.draw(ost5);
+  myGameArea.draw(osto1);
+  myGameArea.draw(osto2);
+  myGameArea.draw(osto3);
+
+
 
   newBoxCollision(ost1);
   newBoxCollision(ost2);
   newBoxCollision(ost3);
   newBoxCollision(ost4);
   newBoxCollision(ost5);
+  newBoxCollision(osto1);
+  newBoxCollision(osto2);
+  newBoxCollision(osto3);
 
   collisionWin(goldSquare);
 
@@ -65,6 +73,10 @@ function livello1() {
   movimento3(ost3, 12);
   movimento3(ost4, 8);
   movimento3(ost5, 15)
+  movimento4(osto1, 10)
+  movimento4(osto2, 13)
+  movimento4(osto3, 15)
+  
 
 
 }
@@ -115,45 +127,72 @@ var goldSquare = {
 
 //ostacoli
 var ost1 = {
-  width: 25,
-  height: 25,
+  width: 20,
+  height: 20,
   x: 320,
   y: 135,
   color: "black",
   border: false
 }
 var ost2 = {
-  width: 25,
-  height: 25,
+  width: 20,
+  height: 20,
   x: 120,
   y: 135,
   color: "black",
   border: false
 }
 var ost3 = {
-  width: 25,
-  height: 25,
+  width: 20,
+  height: 20,
   x: 220,
   y: 135,
   color: "black",
   border: false
 }
 var ost4 = {
-  width: 25,
-  height: 25,
+  width: 20,
+  height: 20,
   x: 400,
   y: 222,
   color: "black",
   border: false
 }
 var ost5 = {
-  width: 25,
-  height: 25,
+  width: 20,
+  height: 20,
   x: 500,
   y: 222,
   color: "black",
   border: false
 }
+var osto1 = {
+  width: 20,
+  height: 20,
+  x: 10,
+  y: 135,
+  color: "black",
+  border: false
+}
+var osto2 = {
+  width: 20,
+  height: 20,
+  x: 10,
+  y: 400,
+  color: "black",
+  border: false
+}
+var osto3 = {
+  width: 20,
+  height: 20,
+  x: 10,
+  y: 570,
+  color: "black",
+  border: false
+}
+
+
+
 
 
 var l2ost1 = {
@@ -182,7 +221,7 @@ var l2ost3 = {
   border: false
 }
 
-
+//gestione collisioni ostacoli
 function newBoxCollision(box) {
   let playerWidth = redsquare.x + redsquare.width;
   let playerHeight = redsquare.y + redsquare.height;
@@ -219,18 +258,19 @@ function newBoxCollision(box) {
 }
 
 
-
+//collisione vittoria
 function collisionWin(box) { //collisioni
   let playerWidth = redsquare.x + redsquare.width;
   let playerHeight = redsquare.y + redsquare.height;
   let boxWidth = box.x + box.width + 5;
   if (playerWidth > box.x & redsquare.x < boxWidth & playerHeight < box.y) {
-    levelIndex++;
+    redsquare.x = 10;
+    redsquare.y = 10;
     alert("Hai vinto!");
   }
 }
 
-
+//movimento verticale ostacoli
 function movimento3(ost, spd) {
   if (ost.y >= 0 && ost.border == false) {
     ost.y = ost.y - spd;
@@ -245,6 +285,22 @@ function movimento3(ost, spd) {
     ost.border = false;
   }
 }
+//movimento orizzontale ostacoli
+function movimento4(ost, spd) {
+  if (ost.x >= 0 && ost.border == false) {
+    ost.x = ost.x - spd;
+  }
+  else {
+    ost.border = true;
+  }
+  if (ost.x <= 700 && ost.border == true) {
+    ost.x = ost.x + spd;
+  }
+  else {
+    ost.border = false;
+  }
+}
+
 
 let hsp = 0;
 let vsp = 0;
